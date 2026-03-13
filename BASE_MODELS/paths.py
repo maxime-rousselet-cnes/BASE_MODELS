@@ -1,43 +1,78 @@
 """
-Arborescence configuration.
+Arborescenceand common constants configuration.
 """
 
+from enum import Enum
 from pathlib import Path
 
-solid_earth_model_profiles = ["elastic", "attenuation", "transient", "viscous"]
+
+class Direction(Enum):
+    """
+    Love numbers directions.
+    """
+
+    VERTICAL = 0
+    TANGENTIAL = 1
+    POTENTIAL = 2
+
+
+class BoundaryCondition(Enum):
+    """
+    Love numbers boundary conditions.
+    """
+
+    LOAD = 0
+    SHEAR = 1
+    POTENTIAL = 2
+
+
+# Earth mean radius (m).
+EARTH_RADIUS = 6.371e6
+
+DEFAULT_MODELS: dict[str, str] = {
+    "ELASTIC": "PREM",
+    "ATTENUATION": "Resovsky",
+    "TRANSIENT": "reference",
+    "VISCOUS": "VM7",
+}
+SOLID_EARTH_MODEL_PROFILES = DEFAULT_MODELS.keys()
 
 # Contains both inputs and outputs.
-data_path = Path("../COMMON_DATA")
+DATA_PATH = Path("../COMMON_DATA")
+
+## Tests.
+TEST_PATH = DATA_PATH.joinpath("TESTS")
 
 ## Inputs.
-inputs_path = data_path.joinpath("inputs")
+INPUTS_PATH = DATA_PATH.joinpath("INPUTS")
+
 ### Solid Earth model descriptions.
-solid_earth_model_profile_descriptions_root_path = inputs_path.joinpath(
-    "solid_earth_model_profile_descriptions"
+SOLID_EARTH_MODEL_PROFILE_DESCRIPTIONS_ROOT_PATH = INPUTS_PATH.joinpath(
+    "SOLID_EARTH_MODEL_PROFILE_DESCRIPTIONS"
 )
-solid_earth_model_profile_descriptions_path: dict[str, Path] = {
-    model_part: solid_earth_model_profile_descriptions_root_path.joinpath(model_part)
-    for model_part in solid_earth_model_profiles
+SOLID_EARTH_MODEL_PROFILE_DESCRIPTIONS_PATH: dict[str, Path] = {
+    model_part: SOLID_EARTH_MODEL_PROFILE_DESCRIPTIONS_ROOT_PATH.joinpath(model_part)
+    for model_part in SOLID_EARTH_MODEL_PROFILES
 }
 
 ## Solid Earth numerical models.
-solid_earth_numerical_models_root_path = data_path.joinpath("solid_earth_numerical_models")
-solid_earth_numerical_models_path: dict[str, Path] = {
-    model_part: solid_earth_numerical_models_root_path.joinpath(model_part)
-    for model_part in solid_earth_model_profiles
+SOLID_EARTH_NUMERICAL_MODELS_ROOT_PATH = DATA_PATH.joinpath("SOLID_EARTH_NUMERICAL_MODELS")
+SOLID_EARTH_NUMERICAL_MODELS_PATH: dict[str, Path] = {
+    model_part: SOLID_EARTH_NUMERICAL_MODELS_ROOT_PATH.joinpath(model_part)
+    for model_part in SOLID_EARTH_MODEL_PROFILES
 }
-solid_earth_full_numerical_models_path = solid_earth_numerical_models_root_path.joinpath(
-    "solid_earth_full_numerical_models"
+SOLID_EARTH_FULL_NUMERICAL_MODELS_PATH = SOLID_EARTH_NUMERICAL_MODELS_ROOT_PATH.joinpath(
+    "SOLID_EARTH_FULL_NUMERICAL_MODELS"
 )
 
 ## Outputs.
-outputs_path = data_path.joinpath("outputs")
+OUTPUTS_PATH = DATA_PATH.joinpath("OUTPUTS")
 
 ### Love numbers.
-love_numbers_path = outputs_path.joinpath("love_numbers")
+LOVE_NUMBERS_PATH = OUTPUTS_PATH.joinpath("LOVE_NUMBERS")
 
 ### Parallel computing logs.
-logs_path = outputs_path.joinpath("logs")
+LOGS_PATH = OUTPUTS_PATH.joinpath("LOGS")
 
 
 def get_love_numbers_subpath(model_id: str, n: int, period: float) -> Path:
@@ -45,7 +80,7 @@ def get_love_numbers_subpath(model_id: str, n: int, period: float) -> Path:
     Generates the path to save the y_i system integration results for a given model.
     """
     return (
-        love_numbers_path.joinpath("individual_love_numbers")
+        LOVE_NUMBERS_PATH.joinpath("INDIVIDUAL_LOVE_NUMBERS")
         .joinpath(model_id)
         .joinpath(str(n))
         .joinpath(str(period))
@@ -58,7 +93,7 @@ def get_interpolated_love_numbers_subpath(periods_id: str, rheological_model_id:
     """
 
     return (
-        love_numbers_path.joinpath("interpolated_love_numbers")
+        LOVE_NUMBERS_PATH.joinpath("INTERPOLATED_LOVE_NUMBERS")
         .joinpath(periods_id)
         .joinpath(rheological_model_id)
     )

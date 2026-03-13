@@ -3,16 +3,14 @@ RAM to file conversions.
 """
 
 import json
-from csv import DictWriter
 from pathlib import Path
 from time import sleep
-from typing import Any, Optional, Union
+from typing import Any, Optional
 
 import numpy
-from pandas import read_csv
 from pydantic import BaseModel
 
-from .paths import tables_path
+from .paths import TEST_PATH
 
 
 class JSONSerialize(json.JSONEncoder):
@@ -33,7 +31,7 @@ class JSONSerialize(json.JSONEncoder):
         return json.JSONEncoder().default(o)
 
 
-def save_base_model(obj: Any, name: str, path: Path):
+def save_base_model(obj: Any, name: str, path: Path = TEST_PATH) -> None:
     """
     Saves a JSON serializable type.
     """
@@ -81,19 +79,10 @@ def load_base_model(
     return loaded_content if not base_model_type else base_model_type(**loaded_content)
 
 
-def load_complex_array(path: Path, name: Optional[str] = None) -> numpy.ndarray:
-    """
-    Loads a complex array.
-    """
-
-    path = path if not name else path.joinpath(name)
-    return numpy.array(object=load_base_model(name="real", path=path)).astype(
-        numpy.complex64
-    ) + 1.0j * numpy.array(object=load_base_model(name="imag", path=path)).astype(numpy.complex64)
-
-
 def save_complex_array(
-    obj: dict[str, numpy.ndarray] | numpy.ndarray, path: Path, name: Optional[str] = None
+    obj: dict[str, numpy.ndarray] | numpy.ndarray,
+    name: Optional[str] = None,
+    path: Path = TEST_PATH,
 ) -> None:
     """
     Saves a complex array.
@@ -109,3 +98,14 @@ def save_complex_array(
     path = path if not name else path.joinpath(name)
     save_base_model(obj=obj["real"], name="real", path=path)
     save_base_model(obj=obj["imag"], name="imag", path=path)
+
+
+def load_complex_array(name: Optional[str] = None, path: Path = TEST_PATH) -> numpy.ndarray:
+    """
+    Loads a complex array.
+    """
+
+    path = path if not name else path.joinpath(name)
+    return numpy.array(object=load_base_model(name="real", path=path)).astype(
+        numpy.complex64
+    ) + 1.0j * numpy.array(object=load_base_model(name="imag", path=path)).astype(numpy.complex64)
