@@ -2,32 +2,7 @@
 Arborescenceand common constants configuration.
 """
 
-from enum import Enum
 from pathlib import Path
-
-
-class Direction(Enum):
-    """
-    Love numbers directions.
-    """
-
-    VERTICAL = 0
-    TANGENTIAL = 1
-    POTENTIAL = 2
-
-
-class BoundaryCondition(Enum):
-    """
-    Love numbers boundary conditions.
-    """
-
-    LOAD = 0
-    SHEAR = 1
-    POTENTIAL = 2
-
-
-# Earth mean radius (m).
-EARTH_RADIUS = 6.371e6
 
 DEFAULT_MODELS: dict[str, str] = {
     "ELASTIC": "PREM",
