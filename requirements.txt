@@ -1,0 +1,7 @@
+black
+isort
+numpy
+pydantic
+pylint
+pytest
+setuptools
