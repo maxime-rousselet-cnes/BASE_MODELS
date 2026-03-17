@@ -6,6 +6,14 @@ from enum import Enum
 
 from .database import load_base_model, load_complex_array, save_base_model, save_complex_array
 from .paths import TEST_PATH
+from .runge_kutta_scheme import adaptive_runge_kutta_45, non_adaptive_runge_kutta_45
+from .symbolic import (
+    evaluate_terminal_parameters,
+    fixed_timestep_integrator,
+    partial_symbols,
+    variation_equation,
+    vector_variation_equation,
+)
 
 
 class Direction(Enum):
@@ -31,4 +39,17 @@ class BoundaryCondition(Enum):
 # Earth mean radius (m).
 EARTH_RADIUS = 6.371e6
 
-to_import = [load_base_model, load_complex_array, save_base_model, save_complex_array, TEST_PATH]
+to_import = [
+    load_base_model,
+    load_complex_array,
+    save_base_model,
+    save_complex_array,
+    TEST_PATH,
+    adaptive_runge_kutta_45,
+    non_adaptive_runge_kutta_45,
+    evaluate_terminal_parameters,
+    fixed_timestep_integrator,
+    partial_symbols,
+    variation_equation,
+    vector_variation_equation,
+]
