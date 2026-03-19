@@ -3,6 +3,7 @@ To test the package. To be called by pytest test.py.
 """
 
 from math import erf
+from pathlib import Path
 from typing import Optional
 
 from numpy import array, exp, pi
@@ -31,9 +32,12 @@ TEST_TERMINAL_PARAMETER_VALUES = {
     r"dt": 1e-4,
 }
 NUMERICAL_CONSISTENCY_TOLERANCE = 1e-5
+BASE_MODEL_TEST_PATH = TEST_PATH.joinpath("base_models")
 
 
-def test_save_and_load_base_model(file_name: str = "save_base_model_test_file") -> None:
+def test_save_and_load_base_model(
+    file_name: str = "save_base_model_test_file", test_path: Path = BASE_MODEL_TEST_PATH
+) -> None:
     """
     Saves a base model in a (.JSON) file and verifies oconsistency when loading.
     """
@@ -44,14 +48,16 @@ def test_save_and_load_base_model(file_name: str = "save_base_model_test_file") 
         "c": [1, 2, 3],
     }
 
-    save_base_model(obj=obj, name=file_name, path=TEST_PATH)
-    loaded_obj = load_base_model(name=file_name, path=TEST_PATH)
+    save_base_model(obj=obj, name=file_name, path=test_path)
+    loaded_obj = load_base_model(name=file_name, path=test_path)
 
     assert obj == loaded_obj
 
 
 def test_save_and_load_complex_array(
-    file_name: str = "save_complex_array_test_file", tolerance: float = SAVE_CONSISTENCY_TOLERANCE
+    file_name: str = "save_complex_array_test_file",
+    tolerance: float = SAVE_CONSISTENCY_TOLERANCE,
+    test_path: Path = BASE_MODEL_TEST_PATH,
 ) -> None:
     """
     Saves a complex array in a (.JSON) file and verifies oconsistency when loading.
@@ -59,8 +65,8 @@ def test_save_and_load_complex_array(
 
     obj = array([1.0 + 2.0j, 3.0 + 4.0j], dtype=complex)
 
-    save_complex_array(obj=obj, name=file_name, path=TEST_PATH)
-    loaded_obj = load_complex_array(name=file_name, path=TEST_PATH)
+    save_complex_array(obj=obj, name=file_name, path=test_path)
+    loaded_obj = load_complex_array(name=file_name, path=test_path)
 
     assert sum(abs(obj - loaded_obj)) < tolerance
 

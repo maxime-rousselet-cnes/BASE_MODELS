@@ -1,29 +1,42 @@
 """
-Arborescenceand common constants configuration.
+Arborescence and common constants configuration.
 """
 
+from enum import Enum
 from pathlib import Path
 
+
+class SolidEarthModelPart(Enum):
+    """
+    Available model parts.
+    """
+
+    attenuation = "attenuation"
+    elastic = "elastic"
+    transient = "transient"
+    viscous = "viscous"
+
+
 DEFAULT_MODELS: dict[str, str] = {
-    "ELASTIC": "PREM",
-    "ATTENUATION": "Resovsky",
-    "TRANSIENT": "reference",
-    "VISCOUS": "VM7",
+    "elastic": "PREM",
+    "attenuation": "Resovsky",
+    "transient": "reference",
+    "viscous": "VM7",
 }
 SOLID_EARTH_MODEL_PROFILES = DEFAULT_MODELS.keys()
 
 # Contains both inputs and outputs.
-DATA_PATH = Path("../COMMON_DATA")
+DATA_PATH = Path("../common_data")
 
 ## Tests.
-TEST_PATH = DATA_PATH.joinpath("TESTS")
+TEST_PATH = DATA_PATH.joinpath("tests")
 
 ## Inputs.
-INPUTS_PATH = DATA_PATH.joinpath("INPUTS")
+INPUTS_PATH = DATA_PATH.joinpath("inputs")
 
 ### Solid Earth model descriptions.
 SOLID_EARTH_MODEL_PROFILE_DESCRIPTIONS_ROOT_PATH = INPUTS_PATH.joinpath(
-    "SOLID_EARTH_MODEL_PROFILE_DESCRIPTIONS"
+    "solid_earth_model_profile_descriptions"
 )
 SOLID_EARTH_MODEL_PROFILE_DESCRIPTIONS_PATH: dict[str, Path] = {
     model_part: SOLID_EARTH_MODEL_PROFILE_DESCRIPTIONS_ROOT_PATH.joinpath(model_part)
@@ -31,23 +44,16 @@ SOLID_EARTH_MODEL_PROFILE_DESCRIPTIONS_PATH: dict[str, Path] = {
 }
 
 ## Solid Earth numerical models.
-SOLID_EARTH_NUMERICAL_MODELS_ROOT_PATH = DATA_PATH.joinpath("SOLID_EARTH_NUMERICAL_MODELS")
-SOLID_EARTH_NUMERICAL_MODELS_PATH: dict[str, Path] = {
-    model_part: SOLID_EARTH_NUMERICAL_MODELS_ROOT_PATH.joinpath("COMPONENTS").joinpath(model_part)
-    for model_part in SOLID_EARTH_MODEL_PROFILES
-}
-SOLID_EARTH_FULL_NUMERICAL_MODELS_PATH = SOLID_EARTH_NUMERICAL_MODELS_ROOT_PATH.joinpath(
-    "FULL_NUMERICAL_MODELS"
-)
+SOLID_EARTH_NUMERICAL_MODELS_PATH = DATA_PATH.joinpath("solid_earth_numerical_models")
 
 ## Outputs.
-OUTPUTS_PATH = DATA_PATH.joinpath("OUTPUTS")
+OUTPUTS_PATH = DATA_PATH.joinpath("outputs")
 
 ### Love numbers.
-LOVE_NUMBERS_PATH = OUTPUTS_PATH.joinpath("LOVE_NUMBERS")
+LOVE_NUMBERS_PATH = OUTPUTS_PATH.joinpath("love_numbers")
 
 ### Parallel computing logs.
-LOGS_PATH = OUTPUTS_PATH.joinpath("LOGS")
+LOGS_PATH = OUTPUTS_PATH.joinpath("logs")
 
 
 def get_love_numbers_subpath(model_id: str, n: int, period: float) -> Path:
