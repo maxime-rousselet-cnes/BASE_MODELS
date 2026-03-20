@@ -35,7 +35,7 @@ TEST_PATH = DATA_PATH.joinpath("tests")
 INPUTS_PATH = DATA_PATH.joinpath("inputs")
 
 ### Solid Earth model descriptions.
-SOLID_EARTH_MODEL_PROFILE_DESCRIPTIONS_ROOT_PATH = INPUTS_PATH.joinpath(
+SOLID_EARTH_MODEL_PROFILE_DESCRIPTIONS_ROOT_PATH = Path("../alna").joinpath(
     "solid_earth_model_profile_descriptions"
 )
 SOLID_EARTH_MODEL_PROFILE_DESCRIPTIONS_PATH: dict[str, Path] = {
