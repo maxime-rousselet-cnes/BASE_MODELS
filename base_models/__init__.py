@@ -6,6 +6,7 @@ from enum import Enum
 
 from .database import load_base_model, load_complex_array, save_base_model, save_complex_array
 from .paths import (
+    DATA_PATH,
     DEFAULT_MODELS,
     LOGS_PATH,
     LOVE_NUMBERS_PATH,
@@ -51,6 +52,7 @@ to_import = [
     load_complex_array,
     save_base_model,
     save_complex_array,
+    DATA_PATH,
     DEFAULT_MODELS,
     LOGS_PATH,
     LOVE_NUMBERS_PATH,
