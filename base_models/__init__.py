@@ -6,10 +6,10 @@ from enum import Enum
 
 from .database import load_base_model, load_complex_array, save_base_model, save_complex_array
 from .paths import (
+    DEFAULT_MODELS,
     LOGS_PATH,
     LOVE_NUMBERS_PATH,
-    SOLID_EARTH_MODEL_PROFILE_DESCRIPTIONS_PATH,
-    SOLID_EARTH_NUMERICAL_MODELS_PATH,
+    SOLID_EARTH_MODEL_PROFILES,
     TEST_PATH,
     SolidEarthModelPart,
 )
@@ -51,10 +51,10 @@ to_import = [
     load_complex_array,
     save_base_model,
     save_complex_array,
+    DEFAULT_MODELS,
     LOGS_PATH,
     LOVE_NUMBERS_PATH,
-    SOLID_EARTH_MODEL_PROFILE_DESCRIPTIONS_PATH,
-    SOLID_EARTH_NUMERICAL_MODELS_PATH,
+    SOLID_EARTH_MODEL_PROFILES,
     TEST_PATH,
     SolidEarthModelPart,
     adaptive_runge_kutta_45,
