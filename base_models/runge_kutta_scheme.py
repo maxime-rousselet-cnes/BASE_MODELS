@@ -163,7 +163,7 @@ def non_adaptive_runge_kutta_45(
 
     if len(t) < 2:
 
-        raise ValueError("Array t must contain at least two elements.")
+        return array(object=[y_0])
 
     y = y_0.astype(complex128 if iscomplexobj(y_0) else float64)
     y_tab = [y]

@@ -53,8 +53,8 @@ def vector_variation_equation(
     state_vector_line: list[Expr],
 ) -> MutableDenseMatrix:
     """
-    Applies the variation method to algebraically derive the time-dependent behavior of a partial
-    derivative to integrate on the quadrature points.
+    Applies the variation method to algebraically derive the time(-like)-dependent behavior of a
+    partial derivative to integrate on the quadrature points.
     """
 
     return Matrix(
