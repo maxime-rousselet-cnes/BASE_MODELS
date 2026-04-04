@@ -19,9 +19,9 @@ class SolidEarthModelPart(Enum):
 
 DEFAULT_MODELS: dict[str, str] = {
     "elastic": "PREM",
-    "attenuation": "Resovsky",
+    "attenuation": "uniform",
     "transient": "reference",
-    "viscous": "VM7",
+    "viscous": "uniform",
 }
 SOLID_EARTH_MODEL_PROFILES = DEFAULT_MODELS.keys()
 

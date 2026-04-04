@@ -45,14 +45,12 @@ def compute_stages(
         if parameters is None:
 
             stage = array(object=fun(t_i, y_i), dtype=y_i.dtype)
-
         else:
 
-            stage = array(object=fun(t_i, parameters, y_i), dtype=y_i.dtype)
-
-        if inf in stage:
-
-            raise ValueError(f"Stage {i} produced non-finite values: {stage}")
+            # Linear interpolation of y between step start and end.
+            p_start, p_end = parameters
+            p_i = p_start + DOPRI_C[i] * (p_end - p_start)
+            stage = array(object=fun(t_i, p_i, y_i), dtype=y_i.dtype)
 
         stages.append(stage)
 
@@ -162,7 +160,13 @@ def non_adaptive_runge_kutta_45(
         t_prev = t[k - 1]
         t_next = t[k]
         step = t_next - t_prev
-        stages = compute_stages(fun=fun, t=t_prev, step=step, y=y, parameters=parameters[k - 1])
+        stages = compute_stages(
+            fun=fun,
+            t=t_prev,
+            step=step,
+            y=y,
+            parameters=(parameters[k - 1], parameters[k]),  # Pass both endpoints.
+        )
         y = estimate_solution(y=y, stages=stages, step=step, b_coeffs=DOPRI_B)
         y_tab.append(y)
 
