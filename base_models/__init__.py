@@ -29,14 +29,15 @@ from .symbolic import (
 
 LOCAL_MODE = True
 N_LOVE_NUMBERS_FOR_GINS = 2 if LOCAL_MODE else 10
+N_PARTIAL_TESTS = 2 if LOCAL_MODE else 101
 N_PERIODS_VISCOUS_INTEGRATION_TEST = 2 if LOCAL_MODE else 30
 TEST_VISCOUS_PERIOD_TAB = logspace(
     -3, 5, num=N_PERIODS_VISCOUS_INTEGRATION_TEST, base=10
 )  # (yr), from sub-daily to 100 kyr.
-TEST_ETA_TAB = linspace(start=1e18, stop=1e19, num=11)
-TEST_ALPHA_TAB = linspace(start=0.2, stop=0.3, num=101)
-TEST_RHO_TAB = linspace(start=7000, stop=9000, num=101)
-TEST_DELTA_TAB = linspace(start=4.0, stop=15.0, num=101)
+TEST_ETA_TAB = linspace(start=1e18, stop=1e19, num=N_PARTIAL_TESTS)
+TEST_ALPHA_TAB = linspace(start=0.2, stop=0.3, num=N_PARTIAL_TESTS)
+TEST_RHO_TAB = linspace(start=7000, stop=9000, num=N_PARTIAL_TESTS)
+TEST_DELTA_TAB = linspace(start=4.0, stop=15.0, num=N_PARTIAL_TESTS)
 
 LOVE_NUMBERS_FOR_GINS_PATH = LOVE_NUMBERS_PATH.joinpath("for_gins")
 LOVE_NUMBERS_FOR_GINS_TABS = {
