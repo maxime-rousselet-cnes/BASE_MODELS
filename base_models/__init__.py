@@ -6,8 +6,6 @@ from enum import Enum
 
 from numpy import linspace, logspace
 
-from base_models import LOVE_NUMBERS_PATH, SolidEarthModelPart, load_base_model, save_base_model
-
 from .database import load_base_model, load_complex_array, save_base_model, save_complex_array
 from .paths import (
     DATA_PATH,
@@ -31,7 +29,7 @@ from .symbolic import (
 
 LOCAL_MODE = True
 N_LOVE_NUMBERS_FOR_GINS = 2 if LOCAL_MODE else 10
-N_PERIODS_VISCOUS_INTEGRATION_TEST = 20
+N_PERIODS_VISCOUS_INTEGRATION_TEST = 2 if LOCAL_MODE else 30
 TEST_VISCOUS_PERIOD_TAB = logspace(
     -3, 5, num=N_PERIODS_VISCOUS_INTEGRATION_TEST, base=10
 )  # (yr), from sub-daily to 100 kyr.
