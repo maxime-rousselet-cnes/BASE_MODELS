@@ -27,6 +27,7 @@ SOLID_EARTH_MODEL_PROFILES = DEFAULT_MODELS.keys()
 
 # Contains both inputs and outputs.
 DATA_PATH = Path("../common_data")
+DEFAULT_WORKDIR = DATA_PATH.parent.joinpath("alna")
 
 ## Tests.
 TEST_PATH = DATA_PATH.joinpath("tests")
