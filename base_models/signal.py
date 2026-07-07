@@ -10,6 +10,10 @@ from scipy.interpolate import lagrange
 
 @dataclass
 class SteadyStateSignalParameters:
+    """
+    To describe a "plateau + main signal + anti-symetric + plateau" signal.
+    """
+
     cubic_spline_length: float = 50.0
     plateau_length: float = 500.0
 
