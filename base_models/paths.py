@@ -17,12 +17,13 @@ class SolidEarthModelPart(Enum):
     VISCOUS = "viscous"
 
 
-DEFAULT_MODELS: dict[str, str] = {
+DEFAULT_MODELS = {
     "elastic": "PREM",
     "attenuation": "uniform",
     "transient": "reference",
     "viscous": "uniform",
 }
+MODELS = {"elastic": "PREM", "attenuation": "Resovsky", "transient": "reference", "viscous": "VM7"}
 SOLID_EARTH_MODEL_PROFILES = DEFAULT_MODELS.keys()
 
 # Contains both inputs and outputs.
@@ -40,3 +41,4 @@ INPUTS_PATH = DATA_PATH.joinpath("inputs")
 
 ## Love numbers.
 LOVE_NUMBERS_PATH = DATA_PATH.joinpath("love_numbers")
+LOVE_NUMBERS_FOR_GINS_PATH = LOVE_NUMBERS_PATH.joinpath("for_gins")
