@@ -5,7 +5,7 @@ Usefull functions to manipulate Fourier transforms of steady-state regime signal
 from dataclasses import dataclass
 
 from numpy import arange, concatenate, linspace, ndarray, zeros_like
-from scipy.interpolate import lagrange
+from scipy.interpolate import BarycentricInterpolator
 
 
 @dataclass
@@ -119,7 +119,7 @@ def lagrange_order4(x: ndarray, y: ndarray, new_x: ndarray) -> ndarray:
         idx_start = max(idx_start, 0)
         x_window = x[idx_start:idx_end]
         y_window = y[idx_start:idx_end]
-        poly = lagrange(x_window, y_window)
+        poly = BarycentricInterpolator(x_window, y_window)
         new_y[j] = poly(nx)
 
     return new_y
