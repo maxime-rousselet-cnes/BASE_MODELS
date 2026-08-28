@@ -23,7 +23,7 @@ DEFAULT_MODELS = {
     "transient": "reference",
     "viscous": "uniform",
 }
-MODELS = {"elastic": "PREM", "attenuation": "Resovsky", "transient": "reference", "viscous": "VM7"}
+MODELS = {"elastic": "PREM", "attenuation": "uniform", "transient": "reference", "viscous": "VM7"}
 SOLID_EARTH_MODEL_PROFILES = DEFAULT_MODELS.keys()
 
 # Contains both inputs and outputs.
