@@ -10,8 +10,6 @@ from typing import Any, Optional
 import numpy
 from pydantic import BaseModel
 
-from .paths import TEST_PATH
-
 
 class JSONSerialize(json.JSONEncoder):
     """
@@ -31,7 +29,7 @@ class JSONSerialize(json.JSONEncoder):
         return json.JSONEncoder().default(o)
 
 
-def save_base_model(obj: Any, name: str, path: Path = TEST_PATH) -> None:
+def save_base_model(obj: Any, name: str, path: Path) -> None:
     """
     Saves a JSON serializable type.
     """
@@ -81,8 +79,8 @@ def load_base_model(
 
 def save_complex_array(
     obj: dict[str, numpy.ndarray] | numpy.ndarray,
+    path: Path,
     name: Optional[str] = None,
-    path: Path = TEST_PATH,
 ) -> None:
     """
     Saves a complex array.
@@ -100,7 +98,7 @@ def save_complex_array(
     save_base_model(obj=obj["imag"], name="imag", path=path)
 
 
-def load_complex_array(name: Optional[str] = None, path: Path = TEST_PATH) -> numpy.ndarray:
+def load_complex_array(path: Path, name: Optional[str] = None) -> numpy.ndarray:
     """
     Loads a complex array.
     """

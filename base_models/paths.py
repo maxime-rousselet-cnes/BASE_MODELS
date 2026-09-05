@@ -27,18 +27,15 @@ MODELS = {"elastic": "PREM", "attenuation": "uniform", "transient": "reference",
 SOLID_EARTH_MODEL_PROFILES = DEFAULT_MODELS.keys()
 
 # Contains both inputs and outputs.
-DATA_PATH = Path("../common_data")
-DEFAULT_WORKDIR = DATA_PATH.parent.joinpath("alna")
-
-## Tests.
+DATA_PATH_TXT_PATH = Path("..")
+ROOT_PATH = Path(
+    "".join(
+        (
+            line.strip()
+            for line in open(DATA_PATH_TXT_PATH.joinpath("data_path.txt"), "r").readlines()
+        )
+    )
+)
+DATA_PATH = ROOT_PATH.joinpath("common_data")
 TEST_PATH = DATA_PATH.joinpath("tests")
-
-### Test figures.
-TEST_FIGURES_PATH = TEST_PATH.joinpath("figures")
-
-## Inputs.
-INPUTS_PATH = DATA_PATH.joinpath("inputs")
-
-## Love numbers.
-LOVE_NUMBERS_PATH = DATA_PATH.joinpath("love_numbers")
-LOVE_NUMBERS_FOR_GINS_PATH = LOVE_NUMBERS_PATH.joinpath("for_gins")
+FIGURES_PATH = DATA_PATH.joinpath("figures")
