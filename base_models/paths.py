@@ -28,14 +28,11 @@ SOLID_EARTH_MODEL_PROFILES = DEFAULT_MODELS.keys()
 
 # Contains both inputs and outputs.
 DATA_PATH_TXT_PATH = Path("..")
-ROOT_PATH = Path(
-    "".join(
-        (
-            line.strip()
-            for line in open(DATA_PATH_TXT_PATH.joinpath("data_path.txt"), "r").readlines()
-        )
-    )
-)
+
+with open(DATA_PATH_TXT_PATH.joinpath("data_path.txt"), "r", encoding="utf-8") as file:
+
+    ROOT_PATH = Path("".join((line.strip() for line in file.readlines())))
+
 DATA_PATH = ROOT_PATH.joinpath("common_data")
 TEST_PATH = DATA_PATH.joinpath("tests")
 FIGURES_PATH = DATA_PATH.joinpath("figures")
